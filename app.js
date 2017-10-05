@@ -4,15 +4,29 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-const index = require('./routes/index');
-const users = require('./routes/users');
+const routes = require('./routes')
+// const indexCtrl = require('./controller/index');
+// const userCtrl = require('./controller/users');
+
+//Set up default mongoose connection
+const mongoDB = 'mongodb://127.0.0.1:27017/testdb';
+mongoose.connect(mongoDB, {
+  useMongoClient: true
+});
+
+//Get the default connection
+const db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +36,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+// route setup and mapping
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
