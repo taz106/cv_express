@@ -10,9 +10,18 @@ routes.use((req, res, next) => {
 
 routes.route('/').get(indexCtrl);
 
+// <<   declaring route for User 
 routes.route('/user')
-      .all((req, res) => {
-          userCtrl(req, res);
-      });
+      .get(userCtrl.getAllUser)
+
+routes.route('/user:userId')
+      .get(userCtrl.getUserById)
+      .patch(userCtrl.patchUser)
+      .delete(userCtrl.deleteUser);
+
+routes.route('/user/signup')
+      .post(userCtrl.postUser);
+
+//   >>
 
 module.exports = routes;

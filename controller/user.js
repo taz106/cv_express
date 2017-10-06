@@ -1,35 +1,36 @@
 const userService = require('../service/user');
 
-let user = function(req, res) {
-    let method = req.method;
-    
-    switch(method) {
-        
-        case "GET":
-            getUser(req, res);
-            break;
-        case "POST":
-            postUser(req, res);
-    }
-
+let user = {
+    getAllUser: getAllUser,
+    getUserById: getUserById,
+    postUser: postUser,
+    patchUser: patchUser,
+    deleteUser: deleteUser
 }
 
-function getUser(req, res) {
-    if (!req.param) getAllUser(res);
-    else getUserById(req, res);
-}
-
-function getAllUser(res) {
+function getAllUser(req, res) {
     console.log("getting all user");
+    return res.send({"message":"success"});
 }
 
 function getUserById(req, res) {
     console.log(`getting user by ${req.param.id}`);
+    return res.send({"message":"success"});
 }
 
 function postUser(req, res) {
     console.log( "calling user post", req.body);
     userService.userPost(req, res);
+}
+
+function patchUser(req, res) {
+    console.log( "calling user patch", req.body);
+    return res.send({"message":"success"});
+}
+
+function deleteUser(req, res) {
+    console.log( "calling user delete", req.body);
+    return res.send({"message":"success"});
 }
 
 module.exports = user;

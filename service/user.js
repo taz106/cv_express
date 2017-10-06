@@ -9,7 +9,7 @@ function userPost(req, res) {
     console.log(newUser);
     UserSchema.create(newUser, (err, user) => {
         if(err)  return res.send({"status":400,"errors":err["errors"]});
-        res.send(user);
+        return res.send(user);
     })
 }
 

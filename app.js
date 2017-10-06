@@ -6,9 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const routes = require('./routes')
-// const indexCtrl = require('./controller/index');
-// const userCtrl = require('./controller/users');
+const routes = require('./routes');
 
 //Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1:27017/testdb';
