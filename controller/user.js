@@ -3,9 +3,10 @@ const userService = require('../service/user');
 let user = {
     getAllUser: getAllUser,
     getUserById: getUserById,
-    postUser: postUser,
+    signupUser: signupUser,
     patchUser: patchUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    loginUser: loginUser
 }
 
 function getAllUser(req, res) {
@@ -18,9 +19,9 @@ function getUserById(req, res) {
     return res.send({"message":"success"});
 }
 
-function postUser(req, res) {
+function signupUser(req, res) {
     console.log( "calling user post", req.body);
-    userService.userPost(req, res);
+    userService.userSignup(req, res);
 }
 
 function patchUser(req, res) {
@@ -31,6 +32,11 @@ function patchUser(req, res) {
 function deleteUser(req, res) {
     console.log( "calling user delete", req.body);
     return res.send({"message":"success"});
+}
+
+function loginUser(req, res) {
+    console.log('calling user login', req.body);
+    return userService.userLogin(req, res);
 }
 
 module.exports = user;
